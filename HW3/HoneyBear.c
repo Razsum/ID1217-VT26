@@ -5,9 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <semaphore.h>
-#include <time.h>
 #include <unistd.h>
-#include <sys/time.h>
 #define MAXSIZE 10 /* maximum matrix size */
 #define MAXWORKERS 10   /* maximum number of workers */
 #define DEBUG
@@ -16,7 +14,6 @@
 int numHoneyBees;           /* number of workers */ 
 int honeyPotCapacity;
 int honeyPot;
-double start_time, end_time; /* start and end times */
 int cycles = 0;              /* counter for bear eating cycles */
 
 sem_t potMutex;      // mutual exclusion for pot
@@ -56,7 +53,7 @@ void *bee(void *arg){
 }
 
 void *bear(void *arg) {
-    while (cycles < NUM_CYCLES) {
+    while (cycles <= NUM_CYCLES) {
         sem_wait(&full);         // wait until pot is full
         sem_wait(&potMutex);     // exclusive access to pot
 
