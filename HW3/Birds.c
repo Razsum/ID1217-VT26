@@ -14,7 +14,7 @@
 
 int numBabyBird, worms, totalWorms, cycles, cycleCounter;
 
-sem_t wormsMutex; // Mutual exclusion for pot
+sem_t wormsMutex; // Mutual exclusion for worm dish
 sem_t empty;      // Signals food is empty
 sem_t full;       // Signals food is full
 
@@ -29,12 +29,12 @@ void sleep_ms(int milliseconds)
 
 void *babyBirdEat(void *arg)
 {
-    int id = *(int *)arg; // thread ID
+    int id = *(int *)arg; // Thread ID
 
     while (!done)
     {
-        sem_wait(&full);       // wait until food is empty or being filled
-        sem_wait(&wormsMutex); // exclusive access to eat
+        sem_wait(&full);       // Wait until food is empty or being filled
+        sem_wait(&wormsMutex); // Exclusive access to eat
 
         if (done)
         { // If prior thread emptied the food capacity while holding the lock we terminate
