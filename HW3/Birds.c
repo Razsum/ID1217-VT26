@@ -12,14 +12,12 @@
 #include <time.h>
 double start_time, end_time;
 
-
-#define MAXSIZE 10    // Max array size
-#define NUMTHREADS 10 // Max amount of working threads
-#define NUMCYCLES 1   // Max number of cycles that the parent birdills the dish
+#define NUMTHREADS 10 // Max amount of working threads (baby-birds)
+#define MAXSIZE 20    // Max worm supply size
+#define NUMCYCLES 3   // Max number of cycles the parent bird will fill the dish for
 // #define DEBUG
 
-int numBabyBird, parentBird, worms, totalWorms, cycleCounter;
-int cycles = 0;
+int numBabyBird, worms, totalWorms, cycles, cycleCounter;
 
 sem_t wormsMutex; // Mutual exclusion for pot
 sem_t empty;      // Signals food is empty
@@ -64,7 +62,7 @@ void *babyBirdEat(void *arg)
         }
         else
         {
-            if (cycles <= NUMCYCLES)
+            if (cycleCounter <= cycles)
             {
                 printf("Baby bird %d wakes up the parent bird!\n", id);
             }
@@ -117,9 +115,9 @@ int main(int argc, char *argv[])
     sem_init(&full, 0, 0);       // Dish full -> baby birds eat
 
     /* read command line args if any */
-    numBabyBird = (argc > 2) ? atoi(argv[1]) : NUMTHREADS;
-    totalWorms = (argc > 1) ? atoi(argv[2]) : MAXSIZE;
-    cycles = (argc > 1) ? atoi(argv[3]) : NUMCYCLES;
+    numBabyBird = (argc > 1) ? atoi(argv[1]) : NUMTHREADS;
+    totalWorms = (argc > 2) ? atoi(argv[2]) : MAXSIZE;
+    cycles = (argc > 3) ? atoi(argv[3]) : NUMCYCLES;
     if (numBabyBird > NUMTHREADS)
         numBabyBird = NUMTHREADS;
     if (totalWorms > MAXSIZE)
