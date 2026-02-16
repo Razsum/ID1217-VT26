@@ -10,7 +10,6 @@
 #define NUMTHREADS 10 // Max amount of working threads (baby-birds)
 #define MAXSIZE 20    // Max worm supply size
 #define NUMCYCLES 3   // Max number of cycles the parent bird will fill the dish for
-// #define DEBUG
 
 int numBabyBird, worms, totalWorms, cycles, cycleCounter;
 
