@@ -10,9 +10,12 @@ public class BearsAndBees {
         Bear bear = new Bear(pot);
         bear.start();
 
+        Bee[] bees = new Bee[numberOfBees];
+
         //Create and start bee threads
         for(int i = 0; i < numberOfBees; i++){
-            new Bee(pot, i).start();
+            bees[i] = new Bee(pot, i);
+            bees[i].start();
         }
     }
 }
