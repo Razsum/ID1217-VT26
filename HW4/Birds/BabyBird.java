@@ -12,12 +12,13 @@ public class BabyBird extends Thread {
     @Override
     public void run(){
         try{
-            while (true) {
+            boolean consumingWorms = true;
+            while (consumingWorms) {
                 Thread.sleep(500); // Ensures semi-fairness
-                worms.eatWorms(id);
+                consumingWorms = worms.eatWorms(id);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
         } 
     }
 }

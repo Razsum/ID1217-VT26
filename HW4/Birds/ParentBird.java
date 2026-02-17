@@ -10,11 +10,9 @@ public class ParentBird extends Thread {
     @Override
     public void run() {
         try {
-            while (true) {
-                worms.gatherWorms();
-            }
+            worms.gatherWorms();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
     }
 }
