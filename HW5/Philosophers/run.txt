@@ -1,0 +1,12 @@
+Kompilera
+javac -d bin HW5/Philosophers/*.java
+
+Run 
+java -cp bin HW5.Philosophers.TableServer
+
+I 5 separata terminaler, run 
+java -cp bin HW5.Philosophers.PhilosopherClient 0
+java -cp bin HW5.Philosophers.PhilosopherClient 1
+java -cp bin HW5.Philosophers.PhilosopherClient 2
+java -cp bin HW5.Philosophers.PhilosopherClient 3
+java -cp bin HW5.Philosophers.PhilosopherClient 4
